@@ -1,17 +1,17 @@
 package guru.qa.country.service;
 
 
-import guru.qa.country.domain.Country;
+import guru.qa.country.data.CountryJson;
 
 import java.util.List;
 
 public interface CountryService {
 
-    List<Country> allCountries();
+    List<CountryJson> allCountries();
 
-    Country countryByCode(String code);
+    CountryJson countryByCode(String code);
 
-    Country addCountry(String name, String code);
+    CountryJson addCountry(String name, String code);
 
-    Country editCountryByCode(String code, String name);
+    CountryJson editCountryByCode(String code, String name);
 }

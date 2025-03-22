@@ -1,6 +1,6 @@
 package guru.qa.country.controller;
 
-import guru.qa.country.domain.Country;
+import guru.qa.country.data.CountryJson;
 import guru.qa.country.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,17 +19,22 @@ public class CountryController {
     }
 
     @GetMapping("/all")
-    public List<Country> all() {
+    public List<CountryJson> all() {
         return countryService.allCountries();
     }
 
+    @GetMapping("/{code}")
+    public CountryJson getCountry(@PathVariable("code") String code) {
+        return countryService.countryByCode(code);
+    }
+
     @PostMapping("/add")
-    public Country add(@RequestBody Country country) {
-        return countryService.addCountry(country.name(), country.code());
+    public CountryJson add(@RequestBody CountryJson country) {
+        return countryService.addCountry(country.countryName(), country.countryCode());
     }
 
     @PatchMapping("/edit")
-    public Country edit(@RequestBody Country country) {
-        return countryService.editCountryByCode(country.code(), country.name());
+    public CountryJson edit(@RequestBody CountryJson country) {
+        return countryService.editCountryByCode(country.countryCode(), country.countryName());
     }
 }
