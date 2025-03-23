@@ -1,6 +1,5 @@
 package guru.qa.country.data;
 
-import guru.qa.country.domain.Country;
 import jakarta.persistence.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -58,8 +57,8 @@ public class CountryEntity {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 
-    public Country toJson() {
-        return new Country(
+    public CountryJson toJson() {
+        return new CountryJson(
                 name,
                 code
         );

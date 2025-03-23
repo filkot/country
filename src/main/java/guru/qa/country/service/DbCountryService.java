@@ -1,8 +1,8 @@
 package guru.qa.country.service;
 
 import guru.qa.country.data.CountryEntity;
+import guru.qa.country.data.CountryJson;
 import guru.qa.country.data.CountryRepository;
-import guru.qa.country.domain.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,11 +18,11 @@ public class DbCountryService implements CountryService {
     }
 
     @Override
-    public List<Country> allCountries() {
+    public List<CountryJson> allCountries() {
         return countryRepository.findAll()
                 .stream()
                 .map(ce -> {
-                            return new Country(
+                            return new CountryJson(
                                     ce.getName(),
                                     ce.getCode());
                         }
@@ -33,12 +33,12 @@ public class DbCountryService implements CountryService {
     }
 
     @Override
-    public Country countryByCode(String code) {
-        return null;
+    public CountryJson countryByCode(String code) {
+        return countryRepository.findCountryByCode(code).toJson();
     }
 
     @Override
-    public Country addCountry(String name, String code) {
+    public CountryJson addCountry(String name, String code) {
         CountryEntity countryEntity = countryRepository.save(
                 new CountryEntity(
                         null,
@@ -51,7 +51,7 @@ public class DbCountryService implements CountryService {
     }
 
     @Override
-    public Country editCountryByCode(String code, String name) {
+    public CountryJson editCountryByCode(String code, String name) {
         CountryEntity country = countryRepository.findCountryByCode(code);
 
         return countryRepository.save(
