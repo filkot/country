@@ -21,7 +21,7 @@ public interface CountryService {
 
     CountryJson addCountry(String name, String code);
 
-    CountryGql addCountryGql(CountryInputGql photoGql);
+    CountryGql addCountryGql(CountryInputGql countryGql);
 
     CountryJson countryByCode(String code);
 

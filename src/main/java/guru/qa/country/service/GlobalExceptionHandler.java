@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CountryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<ApiError> handlePhotoNotFoundException(CountryNotFoundException ex, HttpServletRequest request) {
+    public ResponseEntity<ApiError> handleCountryNotFoundException(CountryNotFoundException ex, HttpServletRequest request) {
         LOG.error(request.getRequestURI(), ex);
         return new ResponseEntity<>(
                 new ApiError(
