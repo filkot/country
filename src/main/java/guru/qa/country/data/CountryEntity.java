@@ -41,6 +41,18 @@ public class CountryEntity {
         return code;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
