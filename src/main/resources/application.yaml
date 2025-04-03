@@ -1,4 +1,9 @@
 spring:
+  grpc:
+    server:
+      port: 9091
+      servlet:
+        enabled: false
   application:
     name: country
   graphql:

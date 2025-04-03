@@ -13,6 +13,8 @@ public interface CountryService {
 
     List<CountryJson> allCountries();
 
+    List<CountryGql> allGqlCountries();
+
     Page<CountryGql> allGqlCountries(Pageable pageable);
 
     CountryJson countryById(String id);
