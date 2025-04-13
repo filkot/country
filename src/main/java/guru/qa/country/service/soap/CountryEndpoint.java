@@ -26,10 +26,7 @@ public class CountryEndpoint {
     public CountryResponse country(@RequestPayload IdRequest request) {
         CountryGql country = countryService.countryGqlById(request.getId());
         CountryResponse response = new CountryResponse();
-        Country xmlCountry = new Country();
-        xmlCountry.setId(country.id().toString());
-        xmlCountry.setName(country.name());
-        xmlCountry.setCode(country.code());
+        Country xmlCountry = fromGql(country);
         response.setCountry(xmlCountry);
 
         return response;
@@ -50,10 +47,7 @@ public class CountryEndpoint {
         response.getCountries().addAll(
                 countries.getContent().stream()
                         .map(countryGql -> {
-                            Country xmlCountry = new Country();
-                            xmlCountry.setId(countryGql.id().toString());
-                            xmlCountry.setName(countryGql.name());
-                            xmlCountry.setCode(countryGql.code());
+                            Country xmlCountry = fromGql(countryGql);
                             return xmlCountry;
                         }).toList()
         );
@@ -68,12 +62,17 @@ public class CountryEndpoint {
                 new CountryInputGql(request.getName(), request.getCode())
         );
         CountryResponse response = new CountryResponse();
+        Country xmlCountry = fromGql(country);
+        response.setCountry(xmlCountry);
+
+        return response;
+    }
+
+    private static Country fromGql(CountryGql country) {
         Country xmlCountry = new Country();
         xmlCountry.setId(country.id().toString());
         xmlCountry.setName(country.name());
         xmlCountry.setCode(country.code());
-        response.setCountry(xmlCountry);
-
-        return response;
+        return xmlCountry;
     }
 }
